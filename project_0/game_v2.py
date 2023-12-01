@@ -3,26 +3,6 @@
 """
 import numpy as np
 
-def random_predict(number:int=1) -> int:
-    """Рандомно угадываем число
-    
-    Args:
-        number (int, optional): Загаданное число. Defaults to 1.
-
-    Returns:
-        int: Число попыток
-    """
-    count = 0
-
-    while True:
-        count += 1
-        predict_number = np.random.randint(1, 101) # предполагаемое число
-        if number == predict_number:
-            break # выход из цикла, если угадали
-    return(count)
-
-print(f'Количество попыток: {random_predict()}')
-
 def score_game(random_predict) -> int:
     """За какое количество попыток в среднем из 1000 подходов компьютер угадывает число
 
@@ -43,6 +23,29 @@ def score_game(random_predict) -> int:
 
     print(f'Компьютер угадывает число в среднем за: {score} попыток')
     return(score)
+
+def random_predict(number:int=1) -> int:
+    """Рандомно угадываем число
+    
+    Args:
+        number (int, optional): Загаданное число. Defaults to 1.
+
+    Returns:
+        int: Число попыток
+    """
+    count = 1
+    min_ = 0
+    max_ = 101    
+    mid = (min_ + max_) // 2
+    
+    while number != mid:
+        count +=1
+        if number > mid:
+            min_ = mid    
+        else:
+            max_ = mid
+        mid = (min_ + max_) // 2
+    return count
 
 if __name__ == '__main__':
     score_game(random_predict)
